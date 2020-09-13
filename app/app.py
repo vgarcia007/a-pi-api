@@ -1,15 +1,28 @@
 import psutil
 import os
+import platform
+import socket
+import re
+import uuid
 
 from flask import Flask
 from flask import jsonify
 
 app = Flask(__name__)
-#app.debug = True # Uncomment to debug
 
 @app.route('/')
 def home():
-    return 'System Stats!'
+
+    distri = platform.dist()
+
+    response = {
+        'distribution': distri[0],
+        'distribution_verson': distri[1],
+        'hostname': str(socket.gethostname()),
+        'mac_address': str(':'.join(re.findall('..', '%012x' % uuid.getnode()))),
+        }
+
+    return jsonify(response)
 
 @app.route('/cpu')
 def cpu():
@@ -28,8 +41,8 @@ def cpu():
         return freq_current
 
     response = {
-        'load': str(psutil.cpu_percent()),
-        'load_avg': str(psutil.getloadavg()),
+        'load': psutil.cpu_percent(),
+        'load_avg': psutil.getloadavg(),
         'freq': int(float(getCPUfrequ())),
         'temp': int(float(getCPUtemperature()))
         }
@@ -43,9 +56,9 @@ def memory():
     available = round(memory.available/1024.0/1024.0,1)
     total = round(memory.total/1024.0/1024.0,1)
     response = {
-        'total': str(total),
-        'free': str(available),
-        'free%': str(memory.percent)
+        'total': total,
+        'free': available,
+        'free_perc': memory.percent
         }
     return jsonify(response)
 
