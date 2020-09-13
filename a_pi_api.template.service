@@ -1,0 +1,13 @@
+[Unit]
+Description=a pi api
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=__APP_DIR__/app
+Environment=FLASK_CONFIG=production
+ExecStart=__APP_DIR__/app/bin/gunicorn -b 0.0.0.0:8000 -w 4 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
