@@ -1,4 +1,6 @@
-**Raspberry Stats API**
+**a pi api**
+
+Flask app served by gunicorn that provides system information as json
 
 Installation
 ```
