@@ -84,7 +84,7 @@ python3 -m venv app
 cd app
 source ./bin/activate
 pip3 install -r requirements.txt
-python app.py
+/bin/bash dev-server.sh
 ```
 
 ## ToDo
