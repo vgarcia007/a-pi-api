@@ -72,9 +72,9 @@ def disk():
     total = round(disk.total/1024.0/1024.0/1024.0,1)
 
     response = {
-        'total': str(total),
-        'free': str(free),
-        'free%': str(disk.percent)
+        'total': total,
+        'free': free,
+        'free%': disk.percent
         }
     return jsonify(response)
 
