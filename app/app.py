@@ -4,7 +4,7 @@ import platform
 import socket
 import re
 import uuid
-
+from version import version
 from flask import Flask
 from flask import jsonify
 
@@ -20,6 +20,7 @@ def home():
         'distribution_verson': distri[1],
         'hostname': str(socket.gethostname()),
         'mac_address': str(':'.join(re.findall('..', '%012x' % uuid.getnode()))),
+        'api_Version': version,
         }
 
     return jsonify(response)

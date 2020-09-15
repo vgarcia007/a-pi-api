@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#get latest version
-git pull
 #get current directory
 current_working_dir=$(pwd)
 #install python and venv
