@@ -12,6 +12,7 @@ Tested with Stretch and Buster Raspberry OS.
 
 ```json
 {
+  "api_Version": "bc39db2",
   "distribution": "debian",
   "distribution_verson": "9.13",
   "hostname": "raspberrypi",
@@ -48,9 +49,9 @@ Tested with Stretch and Buster Raspberry OS.
 
 ```json
 {
-  "free": "11.4",
-  "free%": "18.4",
-  "total": "14.6"
+  "free": 11.4,
+  "free%": 18.4,
+  "total": 14.6
 }
 ```
 
@@ -61,6 +62,11 @@ git clone https://github.com/vgarcia007/a-pi-api.git
 cd a-pi-api
 sudo /bin/bash update.sh
 ```
+This way, the api and its dependencies are installed.
+
+In addition, a system service is created in "/etc/systemd/system/". So that after a restart of the Raspberry the server starts again.
+
+After successful execution, the http server is available on port 8000.
 
 ## Service start/status/stop
 
@@ -75,9 +81,6 @@ systemctl stop a_pi_api
 sudo rm /etc/systemd/system/a_pi_api.service
 sudo systemctl daemon-reload
 ```
-This way, the api and its dependencies are installed.
-In addition, a system service is created in "/etc/systemd/system/".
-After successful execution, the http server is available on port 8000.
 
 ## Start test server without installing a service
 
