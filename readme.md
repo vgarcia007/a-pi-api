@@ -59,7 +59,7 @@ Tested with Stretch and Buster Raspberry OS.
 ```bash
 git clone https://github.com/vgarcia007/a-pi-api.git
 cd a-pi-api
-sudo /bin/bash setup.sh
+sudo /bin/bash update.sh
 ```
 
 ## Service start/status/stop
@@ -75,6 +75,9 @@ systemctl stop a_pi_api
 sudo rm /etc/systemd/system/a_pi_api.service
 sudo systemctl daemon-reload
 ```
+This way, the api and its dependencies are installed.
+In addition, a system service is created in "/etc/systemd/system/".
+After successful execution, the http server is available on port 8000.
 
 ## Start test server without installing a service
 
@@ -86,6 +89,7 @@ source ./bin/activate
 pip3 install -r requirements.txt
 /bin/bash dev-server.sh
 ```
+The test http server is available on port 5000.
 
 ## ToDo
 
