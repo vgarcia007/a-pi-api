@@ -37,7 +37,7 @@ If 1-Wire ds1820 Sensors are present they will be listed
 }
 ```
 
-*URL: http://raspberry:8000/one-wire/ds1820/<sensor>*
+*URL: http://raspberry:8000/one-wire/ds1820/28-0218335796ff*
   
 ```json
 {
