@@ -122,7 +122,8 @@ The test http server is available on port 5000.
 
 ## ToDo
 
-Add Routes for sensors attached to GPIO like 1-Wire
+*Add routes for more sensor types attached to GPIO
+*Add routes for 433MHz switches
 
 ## License
 [WTFPL](https://choosealicense.com/licenses/wtfpl/)
