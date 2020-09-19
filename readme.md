@@ -20,6 +20,32 @@ Tested with Stretch and Buster Raspberry OS.
 }
 ```
 
+If 1-Wire ds1820 Sensors are present they will be listed
+```json
+{
+  "api_Version": "234c33c",
+  "distribution": "debian",
+  "distribution_verson": "9.13",
+  "hostname": "RPIserverschrank",
+  "mac_address": "b8:27:eb:d9:9f:f2",
+  "one_wire": {
+    "ds1820": [
+      "28-02183316b6ff",
+      "28-0218335796ff"
+      ]
+    }
+}
+```
+
+*URL: http://raspberry:8000/one-wire/ds1820/<sensor>*
+  
+```json
+{
+  "temp_c": 26.25,
+  "temp_f": 79.25
+}
+```
+
 *URL: http://raspberry:8000/cpu*
 
 ```json
