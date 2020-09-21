@@ -10,8 +10,6 @@ import uuid
 from version import version
 from flask import Flask
 from flask import jsonify
-from rpi_rf import RFDevice
-
 
 app = Flask(__name__)
 
