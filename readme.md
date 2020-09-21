@@ -8,7 +8,7 @@ Tested with Stretch and Buster Raspberry OS.
 
 ## Routes
 
-*URL: http://raspberry:8000/*
+*URL: http<nolink>://raspberry:8000/*
 
 ```json
 {
@@ -20,7 +20,7 @@ Tested with Stretch and Buster Raspberry OS.
 }
 ```
 
-If 1-Wire ds1820 Sensors are present they will be listed
+If 1-wire ds1820 sensors are present they will be listed
 ```json
 {
   "api_Version": "234c33c",
@@ -37,8 +37,9 @@ If 1-Wire ds1820 Sensors are present they will be listed
 }
 ```
 
-*URL: http://raspberry:8000/one-wire/ds1820/28-0218335796ff*
-  
+*URL: http<nolink>://raspberry:8000/one-wire/ds1820/sensor*  
+**Example**  
+http<nolink>://raspberry:8000/one-wire/ds1820/28-02183316b6ff
 ```json
 {
   "temp_c": 26.25,
@@ -46,8 +47,7 @@ If 1-Wire ds1820 Sensors are present they will be listed
 }
 ```
 
-*URL: http://raspberry:8000/cpu*
-
+*URL: http<nolink>://raspberry:8000/cpu*
 ```json
 {
   "freq": 600,
@@ -61,8 +61,7 @@ If 1-Wire ds1820 Sensors are present they will be listed
 }
 ```
 
-*URL: http://raspberry:8000/memory*
-
+*URL: http<nolink>://raspberry:8000/memory*
 ```json
 {
   "free": 614.8,
@@ -71,8 +70,7 @@ If 1-Wire ds1820 Sensors are present they will be listed
 }
 ```
 
-*URL: http://raspberry:8000/disk*
-
+*URL: http<nolink>://raspberry:8000/disk*
 ```json
 {
   "free": 11.4,
@@ -80,6 +78,22 @@ If 1-Wire ds1820 Sensors are present they will be listed
   "total": 14.6
 }
 ```
+### Control 433 switches
+
+*URL: http<nolink>://raspberry:8000/send433mhz/housecode/devicecode/state*
+```json
+{
+"stderr": "b''",
+"stdout": "b'using pin 0\\nsending systemCode[00011] unitCode[2] command[0]\\n'"
+}
+```
+**Example**  
+http<nolink>://raspberry:8000/send433mhz/00011/2/0 (off)  
+http<nolink>://raspberry:8000/send433mhz/00011/2/1 (on)
+
+**Credits**  
+For this to work a-pi-api ships with a compiled version of "raspberry-remote" (https://github.com/xkonni/raspberry-remote)
+
 
 ## Installation
 
@@ -122,8 +136,8 @@ The test http server is available on port 5000.
 
 ## ToDo
 
-*Add routes for more sensor types attached to GPIO
-*Add routes for 433MHz switches
+* Add routes for more sensor types attached to GPIO
+* Add Moduls for other things like nas and fritzbox
 
 ## License
 [WTFPL](https://choosealicense.com/licenses/wtfpl/)
