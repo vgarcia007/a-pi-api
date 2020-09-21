@@ -1,5 +1,6 @@
 import psutil
 import os
+import subprocess
 import sys
 import time
 import platform
@@ -9,6 +10,7 @@ import uuid
 from version import version
 from flask import Flask
 from flask import jsonify
+from rpi_rf import RFDevice
 
 
 app = Flask(__name__)
@@ -129,7 +131,20 @@ def read_ds1820(sensor):
 
     return jsonify(response)
 
+@app.route('/send433mhz/<housecode>/<devicecode>/<state>')
+def rfswitch(housecode, devicecode, state):
 
+        
+    process = subprocess.Popen(["./send", housecode , devicecode, state], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+
+    response = {
+        'stdout': str(stdout),
+        'stderr': str(stderr)
+        }
+
+    return jsonify(response)
 
 if __name__ == '__main__':
+    
     app.run(host='0.0.0.0')

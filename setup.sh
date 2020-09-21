@@ -7,6 +7,7 @@ apt-get install python3 python3-venv
 #create and activate environment
 python3 -m venv app
 cd app
+chmod + x send
 source ./bin/activate
 #installe required python packages
 pip3 install -r requirements.txt
