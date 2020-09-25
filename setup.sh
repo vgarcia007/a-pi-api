@@ -20,6 +20,7 @@ mv a_pi_api.service /etc/systemd/system/a_pi_api.service
 #lets go
 systemctl daemon-reload
 systemctl start a_pi_api
+systemctl enable a_pi_api
 systemctl status a_pi_api
 echo "use systemctl to controll the a_pi_api service"
 echo "you can reach the api at http://$(hostname):8000"
