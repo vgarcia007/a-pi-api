@@ -7,15 +7,30 @@ import platform
 import socket
 import re
 import uuid
+import json
 from version import version
 from flask import Flask
 from flask import jsonify
 
 app = Flask(__name__)
 
+def list_wde1():
+    if not os.path.isfile('wde1.json'):
+        print('wde1.json not found')
+        return False
+        
+
+    try:
+        wde1_json_data = json.loads(open('wde1.json').read())
+        print('open json')
+        return wde1_json_data
+    except:
+        print('error json')
+        return False
+        
 @app.route('/')
 def home():
-
+    
     def list_ds1820():
         sensors =[]
         try:
@@ -41,6 +56,16 @@ def home():
     if one_wire:
         response['one_wire'] = {}
         response['one_wire']['ds1820'] = one_wire
+
+    wde1 = list_wde1()
+    if wde1:
+        response['serial'] = {}
+        response['serial']['wde1'] = []
+        for key, value in wde1.items():
+
+            if value and 'timestamp' not in key:
+                response['serial']['wde1'].append(key)
+    
 
     return jsonify(response)
 
@@ -128,6 +153,18 @@ def read_ds1820(sensor):
     response = read_temp(sensor)
 
     return jsonify(response)
+
+@app.route('/serial/wde1/<sensor>')
+def read_wde1(sensor):
+
+    wde1 = list_wde1()
+    if wde1:
+        response = {}
+        response['timestamp'] = wde1['timestamp']
+        response[sensor] = float(wde1[sensor])
+
+    return jsonify(response)
+
 
 @app.route('/send433mhz/<housecode>/<devicecode>/<state>')
 def rfswitch(housecode, devicecode, state):
