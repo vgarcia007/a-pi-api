@@ -75,15 +75,24 @@ def cpu():
     def getCPUtemperature():
         res = psutil.sensors_temperatures()
         highest_core_temp=0
-        key='w1_slave_temp'
-        if key not in res:
-            key='coretemp'
-        for core_temp in res[key]:
+
+        if 'coretemp' not in res:
+            return int(float(getCPUtemperature_vcgencmd()))
+
+        for core_temp in res['coretemp']:
             last_core_temp = core_temp[1]
             if last_core_temp > highest_core_temp:
                 highest_core_temp=last_core_temp
 
         return highest_core_temp
+
+
+    def getCPUtemperature_vcgencmd():
+        res = os.popen('vcgencmd measure_temp').readline()
+        res = res.replace("temp=", "")
+        res = res.replace("'C", "")
+        return res
+
 
 
     def getCPUfrequ():
