@@ -76,7 +76,7 @@ def cpu():
         res = psutil.sensors_temperatures()
         highest_core_temp=0
         key='w1_slave_temp'
-        if not res[key]:
+        if key not in res:
             key='coretemp'
         for core_temp in res[key]:
             last_core_temp = core_temp[1]
