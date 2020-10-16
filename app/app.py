@@ -73,10 +73,14 @@ def home():
 def cpu():
 
     def getCPUtemperature():
-        res = os.popen('vcgencmd measure_temp').readline()
-        res = res.replace("temp=", "")
-        res = res.replace("'C", "")
-        return res
+        res = psutil.sensors_temperatures()
+        highest_core_temp=0
+        for core_temp in res['coretemp']:
+            last_core_temp = core_temp[1]
+            if last_core_temp > highest_core_temp:
+                highest_core_temp=last_core_temp
+
+        return highest_core_temp
 
     def getCPUfrequ():
         
@@ -89,7 +93,7 @@ def cpu():
         'load': psutil.cpu_percent(),
         'load_avg': psutil.getloadavg(),
         'freq': int(float(getCPUfrequ())),
-        'temp': int(float(getCPUtemperature()))
+        'temp': getCPUtemperature()
         }
     return jsonify(response)
 
