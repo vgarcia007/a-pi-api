@@ -3,7 +3,7 @@
 #get current directory
 current_working_dir=$(pwd)
 #install python and venv
-apt-get install python3 python3-venv python3.7-dev gcc vcgencmd
+apt-get install python3 python3-venv python3.7-dev gcc
 #create and activate environment
 python3 -m venv app
 cd app
