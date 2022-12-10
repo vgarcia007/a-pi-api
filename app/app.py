@@ -197,6 +197,17 @@ def rfswitch(housecode, devicecode, state):
 
     return jsonify(response)
 
+
+@app.route('/meter')
+def read_meter():
+
+    with open("/home/pi/raspberry-s0-bus-stromzaehler-logger/stromcounter", "r") as file:
+        data = str(file.read())
+    response = {
+        'total': data.strip('\n')
+        }
+    return jsonify(response)
+
 if __name__ == '__main__':
     
     app.run(host='0.0.0.0')
