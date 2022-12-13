@@ -202,10 +202,16 @@ def rfswitch(housecode, devicecode, state):
 def read_meter():
 
     with open("/home/pi/raspberry-s0-bus-stromzaehler-logger/stromcounter", "r") as file:
-        data = str(file.read())
+        data_stromcounter = str(file.read())
+
+    with open("/home/pi/raspberry-s0-bus-stromzaehler-logger/stomtimed", "r") as file:
+        data_stromtimed = str(file.read())
+
     response = {
-        'total': data.strip('\n')
+        'total': data_stromcounter.strip('\n'),
+        'last_tick_time': data_stromtimed.strip('\n')
         }
+
     return jsonify(response)
 
 if __name__ == '__main__':
